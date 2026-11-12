@@ -9,6 +9,7 @@ const entries = [
     'New Android phones: Galaxy S26 Ultra, Pixel 11 Pro and 11 Pro XL, Pixel 10 series, Xiaomi 17 series, Redmi Note 17, Motorola Razr 70 Ultra and Moto G87, Galaxy A17, Infinix Hot 70',
     'Older and work devices for real-world testing: Galaxy S20 to S22, Note20 Ultra, OnePlus Nord 2, OPPO Find X3 Pro, Huawei P30 Pro, Zebra TC78 and MC330',
     'iPhone names split so each model has its own entry (iPhone 16, 16 Plus, 15, 15 Plus, 14 series and more)',
+    'Devices and View options now open in a side panel that slides in from the right, like Mockup Studio, and the devices move aside so you can see every change live',
   ]],
   ['1.3.0', 'November 2026', [
     'New look: lime and ink theme, new icon with iPhone Duo and a phone',

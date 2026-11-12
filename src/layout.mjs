@@ -72,10 +72,12 @@ export function linkBtn(href, label, cls = 'btn btn-light') {
   return `<a class="${cls}" href="${href}"><span class="flip">${esc(label)}</span></a>`;
 }
 
+// Bump when the product screenshots change (assets are cached as immutable).
+const IMG_V = 2;
 export function shot(name, alt, { caption = '', eager = false, cls = 'shot' } = {}) {
   const small = ['hero', 'sync', 'devices', 'appmode', 'mockup'].includes(name);
-  const srcset = small ? ` srcset="/assets/img/${name}-640.webp 640w, /assets/img/${name}.webp 1280w" sizes="(max-width: 1024px) 100vw, 600px"` : '';
-  const img = `<img class="${cls}" src="/assets/img/${name}.webp"${srcset} width="1280" height="800" alt="${esc(alt)}"${eager ? ' fetchpriority="high"' : ' loading="lazy" decoding="async"'}>`;
+  const srcset = small ? ` srcset="/assets/img/${name}-640.webp?v=${IMG_V} 640w, /assets/img/${name}.webp?v=${IMG_V} 1280w" sizes="(max-width: 1024px) 100vw, 600px"` : '';
+  const img = `<img class="${cls}" src="/assets/img/${name}.webp?v=${IMG_V}"${srcset} width="1280" height="800" alt="${esc(alt)}"${eager ? ' fetchpriority="high"' : ' loading="lazy" decoding="async"'}>`;
   return caption ? `<figure>${img}<figcaption>${caption}</figcaption></figure>` : img;
 }
 
