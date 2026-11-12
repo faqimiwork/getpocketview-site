@@ -1,4 +1,4 @@
-import { innerPage, shot, faqBlock } from '../layout.mjs';
+import { videoBlock, videoSchema, innerPage, shot, faqBlock } from '../layout.mjs';
 import { foldTable, ESTIMATE_NOTE } from '../data/tables.mjs';
 
 const slug = 'foldable-simulator';
@@ -15,6 +15,7 @@ export default {
   priority: 0.8,
   crumbs: [['Foldable simulator', '/' + slug]],
   faq,
+  schema: [videoSchema('devices')],
   html: innerPage({
     slug,
     crumbs: [['Foldable simulator', '/' + slug]],
@@ -27,6 +28,7 @@ export default {
 ${foldTable()}
 ${ESTIMATE_NOTE}
 
+${videoBlock('devices', 'Swap in the Galaxy Z Fold8 and unfold it, filmed in PocketView.')}
 <h2>Fold and unfold: what changes for your layout</h2>
 <ul>
   <li><strong>Book-style foldables</strong> (Galaxy Z Fold8, Xiaomi 18 Fold) open to a wide, almost square screen of 860 to 954 px. Your tablet breakpoint (<code>md</code>, 768 px) kicks in, so check that a two-column layout really fits.</li>

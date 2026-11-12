@@ -1,4 +1,4 @@
-import { innerPage, shot, faqBlock } from '../layout.mjs';
+import { videoBlock, videoSchema, innerPage, shot, faqBlock } from '../layout.mjs';
 
 const slug = 'mockup-generator';
 const faq = [
@@ -15,6 +15,7 @@ export default {
   priority: 0.7,
   crumbs: [['Mockup generator', '/' + slug]],
   faq,
+  schema: [videoSchema('mockup')],
   html: innerPage({
     slug,
     crumbs: [['Mockup generator', '/' + slug]],
@@ -30,6 +31,7 @@ export default {
   <li><strong>Press Screenshot</strong><span> to save a PNG, or Record for MP4 or GIF.</span></li>
 </ol>
 
+${videoBlock('mockup', 'Mockup Studio: backgrounds, tilt and export, filmed in PocketView.')}
 <h2>Backgrounds, headline text, tilt and export sizes</h2>
 <ul>
   <li><strong>Backgrounds:</strong> Ambient (colours taken from your site), PocketView dark, Lime, gradients, paper, black, or any custom colour.</li>

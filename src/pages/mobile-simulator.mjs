@@ -1,4 +1,4 @@
-import { innerPage, shot, faqBlock } from '../layout.mjs';
+import { videoBlock, videoSchema, innerPage, shot, faqBlock } from '../layout.mjs';
 import { DEVICES } from '../data/devices.mjs';
 
 const slug = 'mobile-simulator';
@@ -19,7 +19,7 @@ export default {
   priority: 0.9,
   crumbs: [['Mobile simulator', '/' + slug]],
   faq,
-  schema: [{ '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'PocketView', applicationCategory: 'DeveloperApplication', operatingSystem: 'Chrome', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } }],
+  schema: [videoSchema('devices'), { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: 'PocketView', applicationCategory: 'DeveloperApplication', operatingSystem: 'Chrome', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } }],
   html: innerPage({
     slug,
     crumbs: [['Mobile simulator', '/' + slug]],
@@ -36,6 +36,7 @@ export default {
   <li><strong>Touch.</strong> A round touch cursor, drag to scroll with momentum, hidden scrollbars and <code>maxTouchPoints</code> set, like a finger on glass.</li>
 </ul>
 
+${videoBlock('devices', 'Picking devices, swapping in a foldable, and app mode, filmed in PocketView.')}
 <h2>Simulator, emulator or real device?</h2>
 <p>The words get mixed up, so here is the short version.</p>
 <div class="table-wrap"><table>

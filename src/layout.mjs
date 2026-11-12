@@ -36,6 +36,24 @@ export function dev(kind, fg = '#0d1016', bg = '#fbfbfa') {
   }
 }
 
+
+// Product videos (files in public/assets/video). Plays muted when scrolled into view.
+export const VIDEOS = {
+  explainer: { name: 'PocketView in 50 seconds', description: 'See a website on two devices side by side, switch to a foldable and unfold it, and turn the screens into a mockup with PocketView, the free mobile simulator for Chrome.', duration: 'PT51S' },
+  devices: { name: 'Test on 36 devices with PocketView', description: 'Open the device picker, search for foldables, swap a Galaxy Z Fold8 in and unfold it, then preview the site as an installed app.', duration: 'PT33S' },
+  mockup: { name: 'Make a mockup in one click with PocketView', description: 'Open Mockup Studio, pick a background and tilt the devices to turn a live website into a post-ready mockup.', duration: 'PT20S' },
+};
+export function videoBlock(key, caption = '') {
+  const v = VIDEOS[key];
+  return `<figure class="video reveal"><video class="pv-video" src="/assets/video/pocketview-${key}.mp4" poster="/assets/video/pocketview-${key}-poster.jpg" width="1280" height="720" muted loop playsinline controls preload="none" aria-label="${esc(v.name)}"></video>${caption ? `<figcaption>${caption}</figcaption>` : ''}</figure>`;
+}
+export function videoSchema(key) {
+  const v = VIDEOS[key];
+  return { '@context': 'https://schema.org', '@type': 'VideoObject', name: v.name, description: v.description,
+    thumbnailUrl: `${SITE.url}/assets/video/pocketview-${key}-poster.jpg`, contentUrl: `${SITE.url}/assets/video/pocketview-${key}.mp4`,
+    uploadDate: '2026-11-13', duration: v.duration };
+}
+
 export function storeHref(medium) {
   const sep = SITE.storeUrl.includes('?') ? '&' : '?';
   return `${SITE.storeUrl}${sep}utm_source=website&utm_medium=${encodeURIComponent(medium || 'home')}`;
@@ -179,6 +197,8 @@ ${footerHtml()}
   document.addEventListener('click',function(e){if(!e.target.closest('.menu details'))ds.forEach(function(x){x.open=false})});
   var io=('IntersectionObserver' in window)?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15}):null;
   document.querySelectorAll('.reveal').forEach(function(el){io?io.observe(el):el.classList.add('in')});
+  var rm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if('IntersectionObserver' in window&&!rm){var vo=new IntersectionObserver(function(es){es.forEach(function(e){var v=e.target;if(e.isIntersecting){v.preload='auto';var pr=v.play();if(pr&&pr.catch)pr.catch(function(){})}else{v.pause()}})},{threshold:.4});document.querySelectorAll('video.pv-video').forEach(function(v){vo.observe(v)});}
   document.querySelectorAll('table[data-sort]').forEach(function(t){
     t.querySelectorAll('th button').forEach(function(btn,i){btn.addEventListener('click',function(){
       var tb=t.tBodies[0],rows=[].slice.call(tb.rows),asc=btn.dataset.dir!=='asc';btn.dataset.dir=asc?'asc':'desc';

@@ -1,5 +1,5 @@
 import { SITE } from '../site.mjs';
-import { installBtn, linkBtn, faqBlock, ctaBand, ICONS, dev } from '../layout.mjs';
+import { installBtn, linkBtn, faqBlock, ctaBand, ICONS, dev, videoBlock, videoSchema } from '../layout.mjs';
 import { DEVICES } from '../data/devices.mjs';
 
 const faq = [
@@ -86,6 +86,7 @@ export default {
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
     },
     { '@context': 'https://schema.org', '@type': 'Organization', name: 'PocketView', url: SITE.url, logo: SITE.url + '/assets/icons/pocketview-icon-512.png' },
+    videoSchema('explainer'),
   ],
   script: `<script>
 (function(){
@@ -106,6 +107,14 @@ export default {
   <div class="cards-layer" aria-hidden="true">
     <svg class="string" viewBox="0 0 1 1"><path d="M -2000 -227 L -787.71 250.02 Q 0 559.98 787.71 250.02 L 2000 -227"/></svg>
     <div class="cards-origin">${Array.from({ length: 16 }, (_, i) => card(cards[i % cards.length], i)).join('')}</div>
+  </div>
+</section>
+
+<section class="watch" aria-labelledby="watch-h">
+  <div class="glow g-lime" style="width:600px;height:600px;right:-260px;top:-120px"></div>
+  <div class="wrap">
+    <div class="watch-head reveal"><span class="eyebrow">Watch, 50 seconds</span><h2 id="watch-h" style="font-size:clamp(36px,4.6vw,64px)">See PocketView in action</h2><p class="sub center" style="max-width:560px">Two devices side by side, a foldable unfolding, and a mockup in one click. Real footage, no edits to the product.</p></div>
+    ${videoBlock('explainer')}
   </div>
 </section>
 
