@@ -1,4 +1,9 @@
 import { SITE, NAV, FOOTER } from './site.mjs';
+import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+
+// Cache-busting for /assets (served with an immutable cache header).
+const CSS_VER = createHash('sha1').update(readFileSync(new URL('../public/assets/css/site.css', import.meta.url))).digest('hex').slice(0, 8);
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 export { esc };
@@ -39,13 +44,13 @@ export function dev(kind, fg = '#0d1016', bg = '#fbfbfa') {
 
 // Product videos (files in public/assets/video). Plays muted when scrolled into view.
 export const VIDEOS = {
-  explainer: { name: 'PocketView in 50 seconds', description: 'See a website on two devices side by side, switch to a foldable and unfold it, and turn the screens into a mockup with PocketView, the free mobile simulator for Chrome.', duration: 'PT51S' },
-  devices: { name: 'Test on 36 devices with PocketView', description: 'Open the device picker, search for foldables, swap a Galaxy Z Fold8 in and unfold it, then preview the site as an installed app.', duration: 'PT33S' },
-  mockup: { name: 'Make a mockup in one click with PocketView', description: 'Open Mockup Studio, pick a background and tilt the devices to turn a live website into a post-ready mockup.', duration: 'PT20S' },
+  explainer: { name: 'PocketView in 50 seconds', description: 'See a website on two devices side by side, switch to a foldable and unfold it, and turn the screens into a mockup with PocketView, the free mobile simulator for Chrome.', duration: 'PT51S', v: 2 },
+  devices: { name: 'Test on 95 devices with PocketView', description: 'Open the device picker, search for foldables, swap a Galaxy Z Fold8 in and unfold it, then preview the site as an installed app.', duration: 'PT33S', v: 2 },
+  mockup: { name: 'Make a mockup in one click with PocketView', description: 'Open Mockup Studio, pick a background and tilt the devices to turn a live website into a post-ready mockup.', duration: 'PT20S', v: 1 },
 };
 export function videoBlock(key, caption = '') {
   const v = VIDEOS[key];
-  return `<figure class="video reveal"><video class="pv-video" src="/assets/video/pocketview-${key}.mp4" poster="/assets/video/pocketview-${key}-poster.jpg" width="1280" height="720" muted loop playsinline controls preload="none" aria-label="${esc(v.name)}"></video>${caption ? `<figcaption>${caption}</figcaption>` : ''}</figure>`;
+  return `<figure class="video reveal"><video class="pv-video" src="/assets/video/pocketview-${key}.mp4?v=${v.v}" poster="/assets/video/pocketview-${key}-poster.jpg?v=${v.v}" width="1280" height="720" muted loop playsinline controls preload="none" aria-label="${esc(v.name)}"></video>${caption ? `<figcaption>${caption}</figcaption>` : ''}</figure>`;
 }
 export function videoSchema(key) {
   const v = VIDEOS[key];
@@ -149,7 +154,7 @@ export function render(meta, body) {
 ${meta.noindex ? '<meta name="robots" content="noindex">\n' : ''}<meta name="theme-color" content="#feffff">
 <link rel="preload" href="/assets/fonts/hubot-sans.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/inter-tight.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="/assets/css/site.css?v=${CSS_VER}">
 <link rel="icon" href="/assets/icons/favicon.ico" sizes="any">
 <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon-180.png">

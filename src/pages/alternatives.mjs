@@ -1,4 +1,5 @@
 import { innerPage } from '../layout.mjs';
+import { DEVICES } from '../data/devices.mjs';
 
 const slug = 'alternatives';
 
@@ -40,7 +41,7 @@ export default {
 </tbody></table></div>
 
 <h3>PocketView</h3>
-<p>36 devices including the newest foldables (iPhone Duo, Galaxy Z Fold8, Z Flip8, Xiaomi 18 Fold) in official colours, sync scroll and clicks, MP4 and GIF recording with touch ripples, Mockup Studio, app mode for PWAs, dark mode and a real user agent per device. No ads, no analytics, no account. The free version shows 2 devices at once.</p>
+<p>${DEVICES.length} devices including the newest foldables (iPhone Duo, Galaxy Z Fold8, Z Flip8, Xiaomi 18 Fold) in official colours, sync scroll and clicks, MP4 and GIF recording with touch ripples, Mockup Studio, app mode for PWAs, dark mode and a real user agent per device. No ads, no analytics, no account. The free version shows 2 devices at once.</p>
 
 <h3>Mobile simulator, responsive testing tool (Mobile FIRST)</h3>
 <p>The most installed tool in this category, with a high rating on the Chrome Web Store. Its listing describes 58+ devices, multi-device comparison, custom devices, transparent PNG screenshots, realistic touch scrolling, PWA mode and one-click video capture. A strong choice; compare the device list and the paid plan with your needs.</p>

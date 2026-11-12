@@ -1,4 +1,5 @@
 import { innerPage, shot, faqBlock } from '../layout.mjs';
+import { DEVICES } from '../data/devices.mjs';
 
 const slug = 'responsive-viewer';
 const faq = [
@@ -23,7 +24,7 @@ export default {
     heroShot: shot('responsive', 'Responsive viewer with a resizable view at 820 pixels and an iPhone 17 Pro', { eager: true, cls: 'hero-shot' }),
     body: `
 <h2>See phone, tablet and desktop together</h2>
-<p>Responsive bugs hide in the gaps between screen sizes: a menu that wraps at 820 px, a card grid that squeezes at 390 px, a hero image that crops badly on a tablet. Looking at one size at a time means you miss them. With PocketView you pick two devices from 36 (any mix of phones, foldables, tablets and laptops) and see the same page on both at once.</p>
+<p>Responsive bugs hide in the gaps between screen sizes: a menu that wraps at 820 px, a card grid that squeezes at 390 px, a hero image that crops badly on a tablet. Looking at one size at a time means you miss them. With PocketView you pick two devices from ${DEVICES.length} (any mix of phones, foldables, tablets and laptops) and see the same page on both at once.</p>
 <p>Quick sets save clicks: <strong>iPhone + Android</strong>, <strong>Phone + Tablet</strong>, <strong>Small vs Large</strong>, <strong>Mobile + Desktop</strong> and <strong>Foldables</strong>.</p>
 
 <h2>Drag to any width with the breakpoint ruler</h2>

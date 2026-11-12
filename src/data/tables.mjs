@@ -3,7 +3,9 @@ import { DEVICES } from './devices.mjs';
 const fmt = (n) => (Number.isInteger(n) ? String(n) : String(+n.toFixed(3)));
 const px = (d) => `${Math.round(d.w * d.dpr)} × ${Math.round(d.h * d.dpr)}`;
 
-export const ESTIMATED = new Set(['iphone-duo', 'galaxy-z-fold8', 'galaxy-z-fold8-ultra', 'xiaomi-18-fold', 'galaxy-z-flip8']);
+export const ESTIMATED = new Set(['iphone-duo', 'galaxy-z-fold8', 'galaxy-z-fold8-ultra', 'xiaomi-18-fold', 'galaxy-z-flip8',
+  'iphone-18-pro-max', 'iphone-18-pro', 'pixel-11-pro-xl', 'pixel-11-pro', 'pixel-10-pro-fold', 'xiaomi-17-ultra', 'xiaomi-17t-pro', 'xiaomi-17t', 'xiaomi-17',
+  'redmi-note-17', 'moto-razr-70-ultra', 'moto-g87', 'infinix-hot-70', 'galaxy-a17']);
 
 // Simple device table for a group (iPhone, Android, Tablet, Desktop, Foldable).
 export function deviceTable(group, { sortable = false } = {}) {
@@ -21,6 +23,6 @@ export function foldTable() {
   return `<div class="table-wrap"><table><thead><tr><th>Device</th><th class="num">Folded (cover)</th><th class="num">Unfolded (inner)</th><th class="num">Pixel ratio</th></tr></thead><tbody>${tr}</tbody></table></div>`;
 }
 
-export const ESTIMATE_NOTE = '<p class="meta">* Foldable sizes are estimates from each panel’s resolution and the maker’s usual pixel ratio (iPhone Duo follows WebKit’s published figures). Real values can differ slightly with display zoom and OS updates.</p>';
+export const ESTIMATE_NOTE = '<p class="meta">* Sizes for the foldables and the newest 2026 phones are estimates from each panel’s published resolution and the maker’s usual pixel ratio (iPhone Duo follows WebKit’s published figures). Real values can differ slightly with display zoom and OS updates.</p>';
 
 export { DEVICES };

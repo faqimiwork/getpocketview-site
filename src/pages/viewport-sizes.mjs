@@ -50,7 +50,8 @@ ${deviceTable('Desktop', { sortable: true })}
 <h2>Most common widths to design for</h2>
 <ul>
   <li><strong>360 px:</strong> the smallest common width; many Android phones.</li>
-  <li><strong>375 px:</strong> iPhone SE and iPhone 13 mini.</li>
+  <li><strong>320 px:</strong> iPhone SE (1st gen) and iPhone 5; still worth a quick check.</li>
+  <li><strong>375 px:</strong> iPhone SE, iPhone X and XS, 11 Pro, 12 mini and 13 mini.</li>
   <li><strong>390 to 402 px:</strong> most current iPhones.</li>
   <li><strong>412 to 440 px:</strong> large Android phones and Pro Max iPhones.</li>
   <li><strong>768 to 834 px:</strong> iPads in portrait.</li>

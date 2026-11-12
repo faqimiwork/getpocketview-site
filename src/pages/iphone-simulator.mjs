@@ -1,5 +1,5 @@
 import { innerPage, shot, faqBlock } from '../layout.mjs';
-import { deviceTable } from '../data/tables.mjs';
+import { deviceTable, ESTIMATE_NOTE } from '../data/tables.mjs';
 
 const slug = 'iphone-simulator';
 const faq = [
@@ -20,7 +20,7 @@ export default {
     slug,
     crumbs: [['iPhone simulator', '/' + slug]],
     h1: 'iPhone simulator for your website',
-    lead: 'See your site on every current iPhone, from iPhone 17 Pro Max to iPhone SE, right in Chrome on Windows, Mac or Linux. No Mac or Xcode needed for layout checks.',
+    lead: 'See your site on 35 iPhones, from iPhone 18 Pro Max back to iPhone 5, right in Chrome on Windows, Mac or Linux. No Mac or Xcode needed for layout checks.',
     heroShot: shot('iphone', 'iPhone simulator in Chrome showing an iPhone 17 Pro Max and an iPhone SE', { eager: true, cls: 'hero-shot' }),
     body: `
 <h2>Test your site on iPhone without a Mac</h2>
@@ -29,6 +29,7 @@ export default {
 <h2>iPhone models included</h2>
 <p>Sizes are CSS pixels in portrait, the numbers your media queries see.</p>
 ${deviceTable('iPhone')}
+${ESTIMATE_NOTE}
 <p>Plus <strong>iPhone Duo</strong> on the <a href="/foldable-simulator">foldable simulator</a> page, and iPads on the <a href="/viewport-sizes">viewport sizes</a> page.</p>
 
 <h2>Safari bars, Dynamic Island and the iOS user agent</h2>

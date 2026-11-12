@@ -1,5 +1,5 @@
 import { innerPage, shot, faqBlock } from '../layout.mjs';
-import { deviceTable } from '../data/tables.mjs';
+import { deviceTable, ESTIMATE_NOTE } from '../data/tables.mjs';
 
 const slug = 'android-simulator';
 const faq = [
@@ -27,6 +27,7 @@ export default {
 
 <h2>Android models and viewport sizes</h2>
 ${deviceTable('Android')}
+${ESTIMATE_NOTE}
 <p>The generic <strong>Android Compact, Standard and Large</strong> sizes cover the three widths most Android phones share. Galaxy Z Fold8, Z Fold8 Ultra, Z Flip8 and Xiaomi 18 Fold are on the <a href="/foldable-simulator">foldable simulator</a> page.</p>
 
 <h2>Chrome for Android bars and the Android user agent</h2>

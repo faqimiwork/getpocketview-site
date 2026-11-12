@@ -81,7 +81,7 @@ export default {
     {
       '@context': 'https://schema.org', '@type': 'SoftwareApplication',
       name: 'PocketView', applicationCategory: 'DeveloperApplication', operatingSystem: 'Chrome',
-      description: 'Mobile simulator and responsive viewer for Chrome with 36 devices, foldables, sync scroll, recording and mockups.',
+      description: `Mobile simulator and responsive viewer for Chrome with ${DEVICES.length} devices, foldables, sync scroll, recording and mockups.`,
       url: SITE.url, image: SITE.url + '/assets/icons/pocketview-icon-512.png',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
     },
@@ -125,7 +125,7 @@ export default {
     <h2 class="about-title reveal">We help you see your site on <span class="ibox">${dev('phone', '#0d1016', '#c6f432')}</span> every phone, tablet and foldable, so you can ship <span class="ibox">${ICONS.check.replace('stroke="#0d1016"', 'stroke="#a6e01f"')}</span> with confidence.</h2>
     <div class="chips-grid">
       <div class="chips-row">
-        <div class="fchip c-ink reveal d1"><span class="t">36 devices</span><span class="i">${dev('duo', '#c6f432', '#0d1016')}</span></div>
+        <div class="fchip c-ink reveal d1"><span class="t">${DEVICES.length} devices</span><span class="i">${dev('duo', '#c6f432', '#0d1016')}</span></div>
         <div class="fchip c-lime reveal pop d2"><span class="t">Sync scroll</span><span class="i">${ICONS.sync}</span></div>
       </div>
       <div class="chips-row">
@@ -140,7 +140,7 @@ export default {
   <div class="glow g-lime" style="width:691px;height:691px;left:-331px;top:-293px"></div>
   <div class="wrap center reveal" style="max-width:1000px">
     <h2 id="devices-h">The newest phones,<br>ready when you are</h2>
-    <p class="sub center" style="max-width:540px">From iPhone SE to iPhone Duo, Galaxy S25 Ultra to Z Fold8. Real viewports, real pixel ratios, real user agents.</p>
+    <p class="sub center" style="max-width:540px">From iPhone 5 to iPhone 18 Pro Max, Galaxy S20 to S26 Ultra, Pixel 5 to Pixel 11 Pro and the newest foldables. Real viewports, real pixel ratios, real user agents.</p>
   </div>
   <div class="marqs reveal d1" aria-hidden="true">
     <div class="marq-row left">${rowOf(r1)}</div>
@@ -160,7 +160,7 @@ export default {
   <div class="finder-body reveal d1">
     <form class="search-shell" action="/viewport-sizes" method="get" role="search">
       <div class="search-inner">
-        <label><span class="sr-only">Search devices</span><input type="search" name="q" placeholder="Search 36 devices..." autocomplete="off">${ICONS.search}</label>
+        <label><span class="sr-only">Search devices</span><input type="search" name="q" placeholder="Search ${DEVICES.length} devices..." autocomplete="off">${ICONS.search}</label>
         <span class="sdiv" aria-hidden="true"></span>
         <button class="btn btn-lime" type="submit"><span class="flip">Search</span></button>
       </div>

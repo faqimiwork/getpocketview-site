@@ -14,7 +14,7 @@ const faq = [
 
 export default {
   slug,
-  title: 'Mobile Simulator for Chrome: Test on 36 Devices',
+  title: `Mobile Simulator for Chrome: Test on ${DEVICES.length} Devices`,
   description: 'A free mobile simulator in your browser. Real iPhone, Galaxy and Pixel frames, mobile user agent, touch scrolling and dark mode. No ads.',
   priority: 0.9,
   crumbs: [['Mobile simulator', '/' + slug]],

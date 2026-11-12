@@ -93,6 +93,7 @@ h1 { font-size: clamp(44px, 7vw, 90px); line-height: 1.04; }
 h2 { font-size: clamp(36px, 5.4vw, 80px); line-height: 1.05; }
 h3 { font-size: 26px; letter-spacing: -.4px; line-height: 1.15; }
 .sub { font-weight: 500; font-size: clamp(17px, 1.6vw, 20px); line-height: 1.35; color: var(--muted-2); margin: 0; }
+.sub.center { margin-left: auto; margin-right: auto; }
 .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 13px; letter-spacing: .04em; color: var(--ink); background: var(--lime-glow); border-radius: 99px; padding: 6px 12px; margin-bottom: 18px; }
 .eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--lime-deep); }
 .hl { background: var(--lime); border-radius: 12px; padding: 0 .12em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
