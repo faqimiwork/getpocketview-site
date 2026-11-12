@@ -8,7 +8,7 @@ export const SITE = {
   storeIsLive: false,
   email: 'hello@getpocketview.com',
   themeColor: '#0d1016',
-  ogImage: '/assets/img/og.png',
+  ogImage: '/assets/img/og.png?v=2',
   year: 2026,
 };
 
