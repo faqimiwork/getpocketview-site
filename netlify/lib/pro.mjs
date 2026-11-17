@@ -18,7 +18,9 @@ const PRO_STATUSES = new Set(['active', 'trialing', 'past_due']);
 const MAX_TOKENS = 5; // installs per customer; the oldest is signed out when a new one signs in
 const STALE_MS = 12 * 60 * 60 * 1000;
 
-export const store = () => getStore({ name: 'pocketview-pro', consistency: 'strong' });
+// Live and sandbox data are kept apart, so a test subscription never unlocks Pro in live mode.
+export const isLive = () => /^(sk|rk)_live_/.test(process.env.STRIPE_SECRET_KEY || '');
+export const store = () => getStore({ name: isLive() ? 'pocketview-pro-live' : 'pocketview-pro-test', consistency: 'strong' });
 
 // ---------- responses ----------
 const CORS = {
@@ -118,7 +120,12 @@ export async function syncCustomer(customerId) {
 export async function customerRecord(customerId, { fresh = false } = {}) {
   const rec = await store().get(`cust/${customerId}`, { type: 'json' });
   if (!rec || fresh || Date.now() - (rec.syncedAt || 0) > STALE_MS) {
-    try { return await syncCustomer(customerId); } catch (e) { if (rec) return rec; throw e; }
+    try { return await syncCustomer(customerId); } catch (e) {
+      // The customer no longer exists in Stripe (deleted, or from the other mode): no plan.
+      if (e.status === 404) return { ...(rec || {}), customerId, subscriptionId: null, pro: false, status: 'none', plan: null, periodEnd: null };
+      if (rec) return rec; // Stripe unreachable: use the cached plan for now
+      throw e;
+    }
   }
   return rec;
 }
