@@ -7,6 +7,9 @@ export const SITE = {
   storeUrl: 'https://chromewebstore.google.com/search/PocketView',
   storeIsLive: false,
   email: 'hello@getpocketview.com',
+  // Business that sells PocketView Pro (shown in the terms and on Stripe receipts).
+  seller: 'F&Z Publishing, LLC',
+  pro: { monthly: 6, yearly: 48 },
   themeColor: '#0d1016',
   ogImage: '/assets/img/og.png?v=2',
   year: 2026,
@@ -34,11 +37,12 @@ export const NAV = [
     ],
   },
   { label: 'Blog', href: '/blog' },
+  { label: 'Pro', href: '/pro' },
 ];
 
 export const FOOTER = [
-  { title: 'Product', links: [['Mobile simulator', '/mobile-simulator'], ['Responsive viewer', '/responsive-viewer'], ['Mockup generator', '/mockup-generator'], ['Changelog', '/changelog']] },
+  { title: 'Product', links: [['Mobile simulator', '/mobile-simulator'], ['Responsive viewer', '/responsive-viewer'], ['Mockup generator', '/mockup-generator'], ['PocketView Pro', '/pro'], ['Changelog', '/changelog']] },
   { title: 'Devices', links: [['iPhone simulator', '/iphone-simulator'], ['Android simulator', '/android-simulator'], ['Foldable simulator', '/foldable-simulator'], ['Viewport sizes', '/viewport-sizes']] },
   { title: 'Guides', links: [['Responsive checker', '/responsive-checker'], ['Mobile view in Chrome', '/mobile-view-chrome'], ['Mobile friendly test', '/mobile-friendly-test'], ['Blog', '/blog']] },
-  { title: 'Company', links: [['Alternatives', '/alternatives'], ['Privacy', '/privacy'], ['Contact', 'mailto:hello@getpocketview.com']] },
+  { title: 'Company', links: [['Alternatives', '/alternatives'], ['Your account', '/account'], ['Privacy', '/privacy'], ['Terms', '/terms'], ['Refunds', '/refund'], ['Contact', 'mailto:hello@getpocketview.com']] },
 ];
