@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#ff6a3d">
+<title>Lumo: trips that chase the light (PocketView demo)</title>
+<style>
+@font-face { font-family: "Bricolage"; src: url(../fonts/bricolage-grotesque.woff2) format("woff2"); font-weight: 200 800; font-display: block; }
+@font-face { font-family: "Outfit"; src: url(../fonts/outfit.woff2) format("woff2"); font-weight: 100 900; font-display: block; }
+:root { --ink: #1a1230; --muted: #6f6787; --bg: #fff8f1; --card: #fff; --hot: #ff5a36; --sun: #ffb23e; }
+* { box-sizing: border-box; margin: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body { font: 15px/1.45 "Outfit", system-ui, sans-serif; color: var(--ink); background: var(--bg); padding-bottom: 92px; }
+a { color: inherit; text-decoration: none; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 18px; }
+header { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px 10px; max-width: 1180px; margin: 0 auto; }
+.logo { display: flex; align-items: center; gap: 8px; font: 800 24px/1 "Bricolage"; letter-spacing: -.8px; }
+.logo i { width: 26px; height: 26px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #ffe08a, var(--sun) 45%, var(--hot) 100%); box-shadow: 0 0 0 4px rgba(255,90,54,.15); }
+.me { display: flex; gap: 10px; align-items: center; }
+.bell { width: 40px; height: 40px; border-radius: 14px; background: #fff; display: grid; place-items: center; box-shadow: 0 6px 16px -10px rgba(26,18,48,.4); }
+.av { width: 40px; height: 40px; border-radius: 14px; background: linear-gradient(135deg, #7b5cff, #ff5ab4); color: #fff; display: grid; place-items: center; font-weight: 700; }
+nav.top { display: none; gap: 26px; font-weight: 500; color: var(--muted); }
+nav.top b { color: var(--ink); }
+
+.hero { position: relative; margin: 6px 14px 0; border-radius: 30px; overflow: hidden; min-height: 560px; color: #fff; box-shadow: 0 30px 60px -30px rgba(255,90,54,.7); }
+.hero .scene { position: absolute; inset: 0; }
+.hero .scene svg { width: 100%; height: 100%; display: block; }
+.hero .in { position: relative; padding: 26px 22px 22px; display: flex; flex-direction: column; min-height: 560px; }
+.hero .stats { display: none; }
+.tag { align-self: flex-start; background: rgba(255,255,255,.22); backdrop-filter: blur(10px); padding: 7px 12px; border-radius: 99px; font-size: 13px; font-weight: 600; }
+.hero h1 { font: 800 46px/.95 "Bricolage"; letter-spacing: -2px; margin: 16px 0 10px; text-shadow: 0 2px 30px rgba(80,0,40,.35); }
+.hero p { font-size: 16px; opacity: .95; max-width: 300px; }
+.search { margin-top: auto; background: #fff; color: var(--ink); border-radius: 20px; padding: 8px 8px 8px 18px; display: flex; align-items: center; gap: 10px; box-shadow: 0 20px 40px -20px rgba(0,0,0,.5); }
+.search span { flex: 1; color: var(--muted); font-size: 15px; }
+.search b { display: block; color: var(--ink); font-size: 16px; }
+.go { width: 52px; height: 52px; border-radius: 16px; background: linear-gradient(135deg, var(--hot), #ff2d7a); display: grid; place-items: center; color: #fff; font-size: 22px; }
+.stats { display: flex; gap: 8px; margin-top: 14px; }
+.stats div { flex: 1; background: rgba(255,255,255,.18); backdrop-filter: blur(10px); border-radius: 16px; padding: 10px 12px; font-size: 12px; }
+.stats strong { display: block; font: 800 20px/1.1 "Bricolage"; }
+
+.chips { display: flex; gap: 8px; overflow: hidden; padding: 20px 18px 6px; max-width: 1180px; margin: 0 auto; }
+.chip { flex: none; padding: 10px 16px; border-radius: 99px; background: #fff; font-weight: 600; font-size: 14px; box-shadow: 0 6px 16px -12px rgba(26,18,48,.5); }
+.chip.on { background: var(--ink); color: #fff; }
+.chip em { font-style: normal; margin-right: 6px; }
+
+.sec { display: flex; justify-content: space-between; align-items: baseline; padding: 18px 18px 10px; max-width: 1180px; margin: 0 auto; }
+.sec h2 { font: 800 24px/1 "Bricolage"; letter-spacing: -.8px; }
+.sec a { color: var(--hot); font-weight: 600; font-size: 14px; }
+
+.rail { display: flex; gap: 14px; overflow: hidden; padding: 0 18px 4px; max-width: 1180px; margin: 0 auto; }
+.dest { flex: none; width: 230px; background: var(--card); border-radius: 26px; padding: 8px; box-shadow: 0 18px 36px -24px rgba(26,18,48,.55); }
+.dest .pic { position: relative; height: 250px; border-radius: 20px; overflow: hidden; }
+.dest .pic svg { width: 100%; height: 100%; display: block; }
+.heart { position: absolute; top: 10px; right: 10px; width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,.9); display: grid; place-items: center; color: var(--hot); font-size: 16px; }
+.price { position: absolute; left: 10px; bottom: 10px; background: rgba(26,18,48,.55); backdrop-filter: blur(8px); color: #fff; padding: 6px 10px; border-radius: 12px; font-weight: 700; font-size: 13px; }
+.dest h3 { font: 700 18px/1.1 "Bricolage"; margin: 12px 6px 2px; letter-spacing: -.4px; }
+.dest .meta { display: flex; justify-content: space-between; margin: 0 6px 6px; color: var(--muted); font-size: 13px; }
+.dest .meta b { color: var(--ink); }
+
+.deal { margin: 22px 14px 0; border-radius: 26px; padding: 22px; color: #fff; background: radial-gradient(120% 140% at 100% 0%, #ffcf5a 0%, #ff5a36 38%, #b0247a 75%, #3b1a6b 100%); display: flex; gap: 16px; align-items: center; overflow: hidden; position: relative; }
+.deal h3 { font: 800 26px/1 "Bricolage"; letter-spacing: -1px; }
+.deal p { opacity: .9; margin: 6px 0 14px; }
+.deal .btn { display: inline-block; background: #fff; color: var(--ink); padding: 11px 16px; border-radius: 14px; font-weight: 700; }
+.deal .big { font: 800 64px/1 "Bricolage"; letter-spacing: -3px; margin-left: auto; text-shadow: 0 8px 30px rgba(0,0,0,.25); }
+
+.list { padding: 0 14px; max-width: 1180px; margin: 0 auto; display: grid; gap: 12px; }
+.row { display: flex; gap: 14px; align-items: center; background: #fff; border-radius: 22px; padding: 10px; box-shadow: 0 12px 30px -24px rgba(26,18,48,.6); }
+.row .th { width: 78px; height: 78px; border-radius: 16px; overflow: hidden; flex: none; }
+.row .th svg { width: 100%; height: 100%; display: block; }
+.row h4 { font: 700 17px/1.15 "Bricolage"; letter-spacing: -.3px; }
+.row p { color: var(--muted); font-size: 13px; }
+.row .r { margin-left: auto; text-align: right; font-weight: 800; font-size: 17px; padding-right: 6px; }
+.row .r small { display: block; color: var(--muted); font-weight: 500; font-size: 12px; }
+
+.tabbar { position: fixed; left: 12px; right: 12px; bottom: 14px; height: 66px; border-radius: 24px; background: rgba(26,18,48,.92); backdrop-filter: blur(16px); display: flex; justify-content: space-around; align-items: center; color: rgba(255,255,255,.55); font-size: 11px; z-index: 5; box-shadow: 0 20px 40px -16px rgba(26,18,48,.7); }
+.tabbar div { display: grid; justify-items: center; gap: 3px; }
+.tabbar svg { width: 22px; height: 22px; }
+.tabbar .on { color: #fff; }
+.tabbar .on svg { color: var(--sun); }
+footer { text-align: center; color: var(--muted); font-size: 12px; padding: 30px 0 10px; }
+
+@media (min-width: 760px) {
+  body { padding-bottom: 0; }
+  nav.top { display: flex; }
+  .hero { margin: 8px 18px 0; min-height: 520px; }
+  .hero .in { min-height: 520px; padding: 46px; }
+  .hero h1 { font-size: 78px; letter-spacing: -3.5px; max-width: 640px; }
+  .hero p { font-size: 19px; max-width: 460px; }
+  .search { max-width: 620px; margin-top: 14px; }
+  .hero .stats { display: flex; max-width: 620px; margin-top: auto; }
+  .rail { overflow: visible; flex-wrap: wrap; }
+  .dest { width: calc(25% - 11px); }
+  .deal { margin: 26px auto 0; max-width: 1144px; padding: 34px; }
+  .list { grid-template-columns: 1fr 1fr; }
+  .tabbar { display: none; }
+}
+@media (min-width: 1180px) { .hero { max-width: 1144px; margin: 8px auto 0; } }
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="#"><i></i>lumo</a>
+  <nav class="top"><b>Explore</b><span>Trips</span><span>Saved</span><span>Deals</span></nav>
+  <div class="me"><span class="bell">🔔</span><span class="av">AK</span></div>
+</header>
+
+<section class="hero">
+  <div class="scene" data-scene="sunset"></div>
+  <div class="in">
+    <span class="tag">✦ Golden hour season</span>
+    <h1>Chase the light this winter</h1>
+    <p>Hand-picked trips to places where sunsets last a little longer.</p>
+    <div class="stats"><div><strong>120+</strong>destinations</div><div><strong>4.9★</strong>traveller rating</div><div><strong>-30%</strong>early bird</div></div>
+    <div class="search"><span><b>Where to next?</b>Anywhere · Dec 12 to 19 · 2 guests</span><a class="go">→</a></div>
+  </div>
+</section>
+
+<div class="chips">
+  <span class="chip on"><em>🌅</em>Sunsets</span><span class="chip"><em>🏝️</em>Islands</span><span class="chip"><em>🏔️</em>Mountains</span><span class="chip"><em>🌌</em>Northern lights</span><span class="chip"><em>🏜️</em>Desert</span>
+</div>
+
+<div class="sec"><h2>Trending now</h2><a href="#">See all</a></div>
+<div class="rail">
+  <article class="dest"><div class="pic"><div data-scene="beach"></div><span class="heart">♥</span><span class="price">from $640</span></div><h3>Turquoise Bay</h3><div class="meta"><span>7 nights · Islands</span><b>4.9 ★</b></div></article>
+  <article class="dest"><div class="pic"><div data-scene="aurora"></div><span class="heart">♥</span><span class="price">from $1,180</span></div><h3>Aurora Fjords</h3><div class="meta"><span>5 nights · North</span><b>5.0 ★</b></div></article>
+  <article class="dest"><div class="pic"><div data-scene="dunes"></div><span class="heart">♥</span><span class="price">from $520</span></div><h3>Amber Dunes</h3><div class="meta"><span>4 nights · Desert</span><b>4.8 ★</b></div></article>
+  <article class="dest"><div class="pic"><div data-scene="bloom"></div><span class="heart">♥</span><span class="price">from $880</span></div><h3>Blossom Valley</h3><div class="meta"><span>6 nights · Spring</span><b>4.9 ★</b></div></article>
+</div>
+
+<section class="deal">
+  <div><h3>Last-minute escapes</h3><p>Leave this weekend, pay less.</p><a class="btn">Grab a deal</a></div>
+  <div class="big">-30%</div>
+</section>
+
+<div class="sec"><h2>Weekend escapes</h2><a href="#">Map view</a></div>
+<div class="list">
+  <a class="row"><div class="th" data-scene="lake"></div><div><h4>Mirror Lake Cabins</h4><p>2 nights · 1h 40m away</p></div><div class="r">$189<small>/night</small></div></a>
+  <a class="row"><div class="th" data-scene="city"></div><div><h4>Neon Harbour City</h4><p>3 nights · Rooftop hotel</p></div><div class="r">$214<small>/night</small></div></a>
+  <a class="row"><div class="th" data-scene="sunset"></div><div><h4>Coral Cliff Villas</h4><p>2 nights · Sea view</p></div><div class="r">$256<small>/night</small></div></a>
+  <a class="row"><div class="th" data-scene="aurora"></div><div><h4>Starlight Igloos</h4><p>2 nights · Glass roof</p></div><div class="r">$298<small>/night</small></div></a>
+</div>
+<footer>Lumo is a fictional travel brand made to demo PocketView.</footer>
+
+<div class="tabbar">
+  <div class="on"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm3.5 6.5-2 5-5 2 2-5 5-2Z"/></svg>Explore</div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18M3 12h18M3 17h12"/></svg>Trips</div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11Z"/></svg>Saved</div>
+  <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Profile</div>
+</div>
+
+<script>
+// Hand-drawn SVG scenery, so the demo needs no photos.
+const P = {
+  sunset: { sky: ['#2b0f4c', '#a32a6b', '#ff6a3d', '#ffc15e'], sun: '#fff1b8', hills: ['#5a1d5e', '#3d1650', '#22103a'], water: true },
+  lake:   { sky: ['#1d3c78', '#4f7fd8', '#9cc8ff', '#ffe2c4'], sun: '#fff6e0', hills: ['#2e5aa8', '#1f3f80', '#13285a'], water: true },
+  bloom:  { sky: ['#ff8fb8', '#ffb3c9', '#ffd9c2', '#fff1d6'], sun: '#fffaf0', hills: ['#e86a9a', '#c94b84', '#8f2f6a'], flowers: true },
+};
+function rnd(seed) { let s = seed; return () => (s = (s * 9301 + 49297) % 233280) / 233280; }
+function ridge(y, amp, seed, w = 400, h = 500) {
+  // Smooth hills: random peaks joined with curves.
+  const r = rnd(seed), pts = [];
+  for (let x = -40; x <= w + 40; x += 55) pts.push([x, y - r() * amp]);
+  let d = `M${pts[0][0]} ${h} L${pts[0][0]} ${pts[0][1]}`;
+  for (let i = 1; i < pts.length; i++) {
+    const [x0, y0] = pts[i - 1], [x1, y1] = pts[i];
+    d += ` C${x0 + 25} ${y0} ${x1 - 25} ${y1} ${x1} ${y1}`;
+  }
+  return d + ` L${pts[pts.length - 1][0]} ${h} Z`;
+}
+function scene(kind, id) {
+  const W = 400, H = 500, g = (n) => `${kind}${id}${n}`;
+  if (kind === 'beach') return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice"><defs>
+    <linearGradient id="${g('s')}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2fb7ff"/><stop offset=".55" stop-color="#8fe3ff"/><stop offset="1" stop-color="#fff3c9"/></linearGradient>
+    <linearGradient id="${g('w')}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#00c2c7"/><stop offset="1" stop-color="#28e0b9"/></linearGradient></defs>
+    <rect width="${W}" height="${H}" fill="url(#${g('s')})"/><circle cx="300" cy="120" r="46" fill="#fffbe6"/><circle cx="300" cy="120" r="80" fill="#fff" opacity=".25"/>
+    <path d="M0 270 Q200 250 400 270 L400 380 L0 380Z" fill="url(#${g('w')})"/><path d="M0 300 Q100 290 200 300 T400 300" stroke="#fff" stroke-width="3" fill="none" opacity=".6"/>
+    <path d="M0 360 Q200 320 400 350 L400 500 L0 500Z" fill="#ffe1a1"/><path d="M0 395 Q200 360 400 385 L400 500 L0 500Z" fill="#ffd27a"/>
+    <path d="M70 470 Q85 360 120 250" stroke="#4a2a16" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <g fill="#0f8a5f"><path d="M120 250 Q60 230 20 260 Q70 240 118 256Z"/><path d="M120 250 Q170 210 230 230 Q170 225 122 258Z"/><path d="M120 250 Q90 200 50 190 Q100 205 124 252Z"/><path d="M120 250 Q160 260 190 300 Q150 270 118 256Z"/><path d="M120 250 Q130 200 170 175 Q135 210 124 254Z"/></g></svg>`;
+  if (kind === 'aurora') return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice"><defs>
+    <linearGradient id="${g('s')}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#050a24"/><stop offset=".6" stop-color="#14205a"/><stop offset="1" stop-color="#2b3f8f"/></linearGradient>
+    <linearGradient id="${g('a')}" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2dffb0" stop-opacity="0"/><stop offset=".4" stop-color="#2dffb0"/><stop offset=".8" stop-color="#a45cff"/><stop offset="1" stop-color="#ff4fd8" stop-opacity="0"/></linearGradient>
+    <filter id="${g('b')}"><feGaussianBlur stdDeviation="14"/></filter></defs>
+    <rect width="${W}" height="${H}" fill="url(#${g('s')})"/>
+    ${Array.from({ length: 40 }, (_, i) => { const r = rnd(i + 7); return `<circle cx="${r() * W}" cy="${r() * 260}" r="${r() * 1.6 + .4}" fill="#fff" opacity="${r() * .8 + .2}"/>`; }).join('')}
+    <g filter="url(#${g('b')})" opacity=".95"><path d="M-20 170 Q100 60 210 150 T430 110" stroke="url(#${g('a')})" stroke-width="46" fill="none"/><path d="M-20 230 Q140 140 240 210 T430 170" stroke="url(#${g('a')})" stroke-width="28" fill="none" opacity=".7"/></g>
+    <path d="${ridge(330, 90, 3)}" fill="#dfe8ff"/><path d="${ridge(370, 60, 9)}" fill="#9fb3ea"/><path d="${ridge(420, 40, 4)}" fill="#1a2457"/>
+    <path d="M0 440 L400 440 L400 500 L0 500Z" fill="#0e1640"/></svg>`;
+  if (kind === 'dunes') return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice"><defs>
+    <linearGradient id="${g('s')}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff7a3d"/><stop offset=".5" stop-color="#ffb35c"/><stop offset="1" stop-color="#ffe0a3"/></linearGradient></defs>
+    <rect width="${W}" height="${H}" fill="url(#${g('s')})"/><circle cx="120" cy="170" r="60" fill="#fff4d6"/>
+    <path d="M0 300 Q120 230 220 290 T400 270 L400 500 L0 500Z" fill="#f08a3e"/><path d="M0 350 Q150 280 260 340 T400 320 L400 500 L0 500Z" fill="#d9692b"/>
+    <path d="M0 410 Q90 360 200 400 T400 380 L400 500 L0 500Z" fill="#b84a1f"/><path d="M0 470 Q160 420 300 460 T400 450 L400 500 L0 500Z" fill="#8a3214"/>
+    <g fill="#3a1a0c"><path d="M300 330 l6 -24 l6 24 z"/><rect x="303" y="318" width="6" height="18"/></g></svg>`;
+  if (kind === 'city') return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice"><defs>
+    <linearGradient id="${g('s')}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b0b3a"/><stop offset=".6" stop-color="#7a1fa2"/><stop offset="1" stop-color="#ff3d8b"/></linearGradient></defs>
+    <rect width="${W}" height="${H}" fill="url(#${g('s')})"/><circle cx="290" cy="150" r="50" fill="#ffd6f0" opacity=".9"/>
+    ${Array.from({ length: 14 }, (_, i) => { const r = rnd(i + 3); const w = 24 + r() * 26, x = i * 30 - 10, h = 120 + r() * 200; return `<rect x="${x}" y="${420 - h}" width="${w}" height="${h + 80}" fill="${i % 2 ? '#1e0e3d' : '#2a1252'}"/>` + Array.from({ length: Math.floor(h / 22) }, (_, j) => `<rect x="${x + 6}" y="${430 - h + j * 22}" width="${w - 12}" height="4" fill="${r() > .5 ? '#ffd66b' : '#5cf2ff'}" opacity="${r() * .7 + .3}"/>`).join(''); }).join('')}
+    <rect y="440" width="${W}" height="60" fill="#120628"/></svg>`;
+  const p = P[kind] || P.sunset;
+  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice"><defs>
+    <linearGradient id="${g('s')}" x1="0" y1="0" x2="0" y2="1">${p.sky.map((c, i) => `<stop offset="${i / (p.sky.length - 1)}" stop-color="${c}"/>`).join('')}</linearGradient>
+    <radialGradient id="${g('g')}"><stop offset="0" stop-color="${p.sun}"/><stop offset=".35" stop-color="${p.sun}" stop-opacity=".55"/><stop offset="1" stop-color="${p.sun}" stop-opacity="0"/></radialGradient></defs>
+    <rect width="${W}" height="${H}" fill="url(#${g('s')})"/><circle cx="210" cy="285" r="190" fill="url(#${g('g')})"/><circle cx="210" cy="285" r="58" fill="${p.sun}"/>
+    <path d="${ridge(310, 120, 11)}" fill="${p.hills[0]}" opacity=".85"/><path d="${ridge(350, 90, 5)}" fill="${p.hills[1]}"/><path d="${ridge(390, 60, 2)}" fill="${p.hills[2]}"/>
+    ${p.water ? `<rect y="395" width="${W}" height="105" fill="${p.hills[2]}"/><g opacity=".7">${Array.from({ length: 8 }, (_, i) => `<rect x="${170 - i * 6}" y="${405 + i * 11}" width="${80 + i * 12}" height="3" rx="1.5" fill="${p.sun}" opacity="${.9 - i * .1}"/>`).join('')}</g>` : ''}
+    ${p.flowers ? Array.from({ length: 26 }, (_, i) => { const r = rnd(i + 21); return `<circle cx="${r() * W}" cy="${380 + r() * 120}" r="${4 + r() * 7}" fill="${r() > .5 ? '#ffe3ef' : '#fff'}" opacity=".9"/>`; }).join('') : ''}
+  </svg>`;
+}
+document.querySelectorAll('[data-scene]').forEach((el, i) => { el.innerHTML = scene(el.dataset.scene, i); if (!el.classList.contains('scene') && !el.classList.contains('th')) el.style.height = '100%'; });
+</script>
+</body>
+</html>
