@@ -7,8 +7,8 @@ export const SITE = {
   storeUrl: 'https://chromewebstore.google.com/detail/pocketview-mobile-simulat/hdfdpaakiopndhcdillcikbmddgchako',
   storeIsLive: false,
   email: 'hello@getpocketview.com',
-  // Business that sells PocketView Pro (shown in the terms and on Stripe receipts).
-  seller: 'F&Z Publishing, LLC',
+  // Business that sells PocketView Pro (shown in the terms and the Chrome Web Store trader details).
+  seller: 'NOTA TECH',
   pro: { monthly: 6, yearly: 48 },
   themeColor: '#0d1016',
   ogImage: '/assets/img/og.png?v=2',

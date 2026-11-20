@@ -8,16 +8,16 @@ export default {
   title: 'Terms of Service | PocketView',
   description: 'The terms for using the free PocketView extension and for buying PocketView Pro: billing, renewals, cancellation, acceptable use and liability.',
   priority: 0.2,
-  updated: '2026-11-18',
+  updated: '2026-11-20',
   crumbs: [['Terms', '/' + slug]],
   html: innerPage({
     slug,
     crumbs: [['Terms', '/' + slug]],
     h1: 'Terms of service',
-    lead: 'Plain terms for a simple product. Last updated 18 November 2026.',
+    lead: 'Plain terms for a simple product. Last updated 20 November 2026.',
     body: `
 <h2>Who we are</h2>
-<p>PocketView and PocketView Pro are sold by ${SITE.seller} (“we”). You can reach us at <a href="mailto:${SITE.email}">${SITE.email}</a>.</p>
+<p>PocketView and PocketView Pro are sold by ${SITE.seller}, a business registered in Malaysia (“we”). You can reach us at <a href="mailto:${SITE.email}">${SITE.email}</a>.</p>
 
 <h2>The free extension</h2>
 <p>You may use the free PocketView extension for personal and commercial work at no cost. It is provided as it is, and features may change between versions.</p>
