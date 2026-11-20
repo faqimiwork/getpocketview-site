@@ -4,7 +4,7 @@ export const SITE = {
   url: 'https://getpocketview.com',
   tagline: 'See your site on every screen.',
   // TODO: replace with the real listing URL after the Chrome Web Store approves PocketView.
-  storeUrl: 'https://chromewebstore.google.com/search/PocketView',
+  storeUrl: 'https://chromewebstore.google.com/detail/pocketview-mobile-simulat/hdfdpaakiopndhcdillcikbmddgchako',
   storeIsLive: false,
   email: 'hello@getpocketview.com',
   // Business that sells PocketView Pro (shown in the terms and on Stripe receipts).

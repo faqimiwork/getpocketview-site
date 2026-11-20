@@ -84,8 +84,9 @@ export default {
       description: `Mobile simulator and responsive viewer for Chrome with ${DEVICES.length} devices, foldables, sync scroll, recording and mockups.`,
       url: SITE.url, image: SITE.url + '/assets/icons/pocketview-icon-512.png',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      installUrl: SITE.storeUrl,
     },
-    { '@context': 'https://schema.org', '@type': 'Organization', name: 'PocketView', url: SITE.url, logo: SITE.url + '/assets/icons/pocketview-icon-512.png' },
+    { '@context': 'https://schema.org', '@type': 'Organization', name: 'PocketView', url: SITE.url, logo: SITE.url + '/assets/icons/pocketview-icon-512.png', sameAs: [SITE.storeUrl] },
     videoSchema('explainer'),
   ],
   script: `<script>

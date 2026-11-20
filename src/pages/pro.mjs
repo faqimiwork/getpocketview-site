@@ -1,4 +1,4 @@
-import { faqBlock } from '../layout.mjs';
+import { faqBlock, storeHref } from '../layout.mjs';
 import { SITE } from '../site.mjs';
 
 const slug = 'pro';
@@ -55,7 +55,7 @@ export default {
       <div class="price-amt">$0</div>
       <p class="price-note">Free forever. No account.</p>
       ${list(FREE)}
-      <a class="btn btn-light" href="${SITE.storeUrl}" rel="noopener" data-install><span class="flip">Add to Chrome</span></a>
+      <a class="btn btn-light" href="${storeHref('pro')}" rel="noopener" data-install><span class="flip">Add to Chrome</span></a>
     </div>
     <div class="price-card pro">
       <h3>Pro</h3>
