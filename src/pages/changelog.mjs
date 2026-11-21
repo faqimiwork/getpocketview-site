@@ -4,6 +4,18 @@ const slug = 'changelog';
 
 // Newest first. Add an entry for every release and every new device.
 const entries = [
+  ['1.6.0', 'November 2026', [
+    'Full-page screenshots: each device scrolls the page and saves it as one tall PNG. Fixed and sticky headers show once, lazy images load first (Shift + S)',
+    'Open on your phone: a QR code for the current page, so you can check it on a real device in one scan. Works offline, and explains how to reach localhost from your phone',
+    'Form sync (Pro): type, pick or tick in one device and every other device fills in the same field. Passwords are never copied',
+    'Smaller, cleaner badge on free Studio exports',
+    'A one-time, skippable request to rate PocketView after a few successful captures',
+  ]],
+  ['1.5.0', 'November 2026', [
+    'PocketView Studio: a full mockup editor with Device, Browser and Screenshot frames, backgrounds, headlines, zoom and 3D tilt',
+    'PocketView Pro: up to 6 devices, unlimited recording, 4x Studio export with no badge. USD 6 a month or USD 48 a year',
+    'Sign in with a 6 digit email code to use Pro on another computer',
+  ]],
   ['1.4.0', 'November 2026', [
     '59 new devices, 95 in total: iPhone 18 Pro and 18 Pro Max, every iPhone back to iPhone 5, and 44 Android phones',
     'New Android phones: Galaxy S26 Ultra, Pixel 11 Pro and 11 Pro XL, Pixel 10 series, Xiaomi 17 series, Redmi Note 17, Motorola Razr 70 Ultra and Moto G87, Galaxy A17, Infinix Hot 70',

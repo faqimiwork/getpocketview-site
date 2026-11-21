@@ -3,10 +3,11 @@ import { installBtn, linkBtn, faqBlock, ctaBand, ICONS, dev, videoBlock, videoSc
 import { DEVICES } from '../data/devices.mjs';
 
 const faq = [
-  ['Is PocketView free?', '<p>Yes. The free version shows 2 devices side by side, with every device, sync scroll, screenshots, recording and Mockup Studio included. A Pro plan with more devices at once will come later, with one clear price.</p>'],
+  ['Is PocketView free?', '<p>Yes. The free version shows 2 devices side by side, with every device, sync scroll, screenshots, full-page screenshots, recording and Mockup Studio included. <a href="/pro">PocketView Pro</a> adds up to 6 devices, unlimited recording, form sync and badge-free 4x export for one clear price.</p>'],
   ['Does it work with localhost and staging sites?', '<p>Yes. Open <code>http://localhost:3000</code> or any staging URL the same way as a live site. Your own browser loads it, so password-protected staging sites work when you are signed in.</p>'],
-  ['Is it a real iOS or Android simulator?', '<p>No, and we say so plainly. PocketView simulates screen size, pixel ratio, user agent, touch and display mode inside Chrome. Layout and responsive CSS behave like on the device, but Safari engine bugs only show on a real iPhone. Do a final check on a real phone before a big launch.</p>'],
-  ['Does PocketView collect my data?', '<p>No. There are no accounts, no analytics and no servers. Settings stay in your browser. Read the <a href="/privacy">privacy policy</a>.</p>'],
+  ['Is it a real iOS or Android simulator?', '<p>No, and we say so plainly. PocketView simulates screen size, pixel ratio, user agent, touch and display mode inside Chrome. Layout and responsive CSS behave like on the device, but Safari engine bugs only show on a real iPhone. Do a final check on a real phone before a big launch: click the QR code button and your phone opens the same page in one scan.</p>'],
+  ['Does it open sites that block iframes?', '<p>Yes. Many production sites refuse to load inside a frame, which breaks most responsive testers. PocketView loads them anyway, only inside its own simulator tab, so you can test your live site as well as localhost.</p>'],
+  ['Does PocketView collect my data?', '<p>No. There are no ads, no analytics and no tracking, and the simulator works without an account. Settings stay in your browser. Pro only uses your email to keep your licence active. Read the <a href="/privacy">privacy policy</a>.</p>'],
   ['Which browsers does it support?', '<p>Google Chrome, plus browsers that install Chrome Web Store extensions, such as Microsoft Edge, Brave and Arc.</p>'],
   ['How is it different from Chrome DevTools device mode?', '<p>DevTools shows one device at a time inside the inspector. PocketView shows devices side by side with real frames, syncs scrolling between them, and adds foldables, recording, mockups and app mode. See <a href="/mobile-view-chrome">3 ways to get mobile view in Chrome</a>.</p>'],
 ];
@@ -65,7 +66,7 @@ const trow = (list, dir) => `<div class="trow ${dir}"><div class="trow-inner">${
 
 const promises = [
   ['No ads, ever. Not in the free version, not in Pro.', 'Promise 1 of 5 · Clean'],
-  ['No tracking. No analytics, no servers, no account.', 'Promise 2 of 5 · Private'],
+  ['No tracking. No analytics, and no account needed to use it.', 'Promise 2 of 5 · Private'],
   ['No surprise tabs on install, no pushy uninstall page.', 'Promise 3 of 5 · Respectful'],
   ['Two devices side by side, free. Pro gets one clear price.', 'Promise 4 of 5 · Fair'],
   ['New phones added as they launch, foldables included.', 'Promise 5 of 5 · Current'],
@@ -184,7 +185,7 @@ export default {
       <div class="feat-cards">
         <div class="reveal from-right d3">${fcard(ICONS.record, 'Record MP4 and GIF', 'Demos and bug reports', 'Capture the device frames with a ripple on every tap. Crop is automatic; nothing leaves your computer.', 'One click', '/mockup-generator')}</div>
         <div class="reveal from-right d2">${fcard(ICONS.image, 'Mockup Studio', 'Post-ready images', 'Backgrounds, headline, tilt and export sizes for posts, Stories, the Chrome Web Store and link previews.', '7 canvas sizes', '/mockup-generator')}</div>
-        <div class="reveal from-right d1">${fcard(ICONS.link, 'Share your setup', 'Team friendly', 'Copy a link with the exact devices, orientation and mode, so your team and clients see what you see.', 'Works with localhost', '/responsive-checker')}</div>
+        <div class="reveal from-right d1">${fcard(ICONS.app, 'Full-page screenshots', 'The whole page, one PNG', 'Each device scrolls the page for you and stitches it into one tall image. Fixed headers show once, lazy images load first.', 'Shift + S', '/mockup-generator')}</div>
       </div>
       <div class="feat-text reveal from-right"><h2>Built to show your work</h2><p class="sub">Turn the screens you just tested into a demo, a mockup or a bug report without opening another app.</p><p style="margin-top:28px">${linkBtn('/mockup-generator', 'See Mockup Studio', 'btn btn-lime')}</p></div>
     </div>
