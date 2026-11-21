@@ -9,7 +9,8 @@ const savePct = Math.round((1 - yearly / (monthly * 12)) * 100);
 const FREE = [
   ['All 95 iPhone, Android, foldable and iPad screens', true],
   ['2 devices side by side, with sync scroll', true],
-  ['Screenshots of every device', true],
+  ['Screenshots and full-page screenshots of every device', true],
+  ['QR code to open the page on your phone', true],
   ['Screen recording up to 15 seconds', true],
   ['Studio editor with every style and background', true],
   ['Studio export at 1x with a small PocketView badge', true],
@@ -18,6 +19,7 @@ const PRO = [
   ['Everything in Free', true],
   ['Up to 6 devices side by side', true],
   ['Unlimited MP4 and GIF recording', true],
+  ['Form sync: type in one device, every device fills in', true],
   ['Studio export up to 4x, no badge', true],
   ['Copy mockups to the clipboard without a badge', true],
   ['Use it on up to 5 computers', true],
@@ -28,7 +30,7 @@ const faq = [
   ['Can I cancel any time?', 'Yes. Cancel from <a href="/account">your account</a> in two clicks. Pro stays on until the end of the period you paid for, and you are not charged again.'],
   ['Do you offer refunds?', `Yes. If Pro is not right for you, email us within 14 days of your first payment and we refund it in full. See the <a href="/refund">refund policy</a>.`],
   ['How do I use Pro on another computer?', 'Open PocketView on that computer, choose Sign in, and enter the email you paid with. We email you a 6 digit code. No password needed.'],
-  ['Is the free version still free?', 'Yes. The simulator, all 95 devices, sync scroll, screenshots and the Studio editor stay free. Pro removes the limits on devices, recording and export.'],
+  ['Is the free version still free?', 'Yes. The simulator, all 95 devices, sync scroll, screenshots and the Studio editor stay free. Pro removes the limits on devices, recording and export, and adds form sync.'],
   ['Which payment methods do you accept?', 'Cards, Apple Pay and Google Pay through Stripe. We never see or store your card number.'],
   ['Do prices include tax?', 'Prices are in US dollars. Where sales tax or VAT applies, it is shown at checkout before you pay.'],
 ];
