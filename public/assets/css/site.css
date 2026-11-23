@@ -434,3 +434,20 @@ tr.hit td { background: var(--lime-tint); }
 .linkish { background: none; border: 0; padding: 0; font: inherit; color: var(--olive); text-decoration: underline; cursor: pointer; }
 .pro-hero { padding-bottom: 20px; }
 @media (max-width: 760px) { .price-grid { grid-template-columns: 1fr; } }
+
+/* ---------- mobile: no sideways scroll ---------- */
+/* Decorative glows sit partly outside their sections; clip them so the page never gets wider than the screen. */
+html, body { overflow-x: hidden; }
+@supports (overflow: clip) { html, body { overflow-x: clip; } }
+section:has(> .glow) { overflow-x: clip; }
+@media (max-width: 420px) {
+  .navbar { gap: 8px; padding-left: 10px; padding-right: 8px; }
+  .nav-left { gap: 10px; }
+  .vdiv { display: none; }
+  .nav-right { gap: 4px; }
+  .menu-btn { padding: 4px; }
+}
+@media (max-width: 340px) {
+  .brandword { font-size: 16px; }
+  .navbar .nav-right .btn { padding: 0 8px; font-size: 13px; }
+}
